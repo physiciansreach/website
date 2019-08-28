@@ -1,0 +1,42 @@
+<div fxLayout="row" fxLayoutAlign="center start">
+  <div fxLayout="column" fxLayoutGap="10px">
+
+    <mat-tab-group [selectedIndex]="lastTabIndex$ | async" (selectedTabChange)="onTabChange($event)">
+      <mat-tab label="Admins">
+        <div fxLayout="row" fxLayoutAlign="center start">
+          <p>
+            <app-admin-list></app-admin-list>
+          </p>
+        </div>
+      </mat-tab>
+      <mat-tab label="Physicians">
+        <div fxLayout="row" fxLayoutAlign="center start">
+          <p>
+            <app-physician-list></app-physician-list>
+          </p>
+        </div>
+      </mat-tab>
+      <mat-tab label="Agents">
+        <div fxLayout="row" fxLayoutAlign="center start">
+          <p>
+            <app-agent-list></app-agent-list>
+          </p>
+        </div>
+      </mat-tab>
+      <mat-tab label="Vendors">
+        <div fxLayout="row" fxLayoutAlign="center start">
+          <p>
+            <app-vendor-list></app-vendor-list>
+          </p>
+        </div>
+      </mat-tab>
+      <mat-tab label="Patients">
+        <div fxLayout="row" fxLayoutAlign="center start">
+          <p>
+            <app-patient-list></app-patient-list>
+          </p>
+        </div>
+      </mat-tab>
+    </mat-tab-group>
+  </div>
+</div>

@@ -1,0 +1,121 @@
+<div class="margin-30" fxLayout="row" fxLayoutAlign="center start">
+  <form [formGroup]="form" novalidate fxLayout="column" fxLayoutGap="30px" (ngSubmit)="onSubmit()">
+
+    <div fxLayout="row" fxLayoutGap="30px">
+
+      <div fxLayout="column">
+        <mat-label>1. How tall are you?</mat-label>
+        <mat-form-field>
+          <select matNativeControl placeholder="Height" formControlName="height">
+            <option *ngFor="let height of heights" [value]="height">{{height}}</option>
+
+          </select>
+          <mat-error *ngIf="form.get('height').hasError('required') && form.get('height').touched">
+            Please enter the height.
+          </mat-error>
+        </mat-form-field>
+
+        <mat-label>2. How much do you weigh?</mat-label>
+        <mat-form-field>
+          <input matInput placeholder="Weight" type="text" formControlName="weight">
+          <mat-error *ngIf="form.get('weight').errors != null && form.get('weight').touched">
+            Please enter the weight, only numeric values.
+          </mat-error>
+        </mat-form-field>
+
+        <mat-label>3. What is your shoe size?</mat-label>
+        <mat-form-field>
+          <select matNativeControl placeholder="Shoe Size" formControlName="shoeSize">
+            <option *ngFor="let shoeSize of shoeSizes" [value]="shoeSize">{{shoeSize}}</option>
+
+          </select>
+          <mat-error *ngIf="form.get('shoesize').hasError('required') && form.get('shoesize').touched">
+            Please enter the shoe size.
+          </mat-error>
+        </mat-form-field>
+
+        <mat-label>4. What is your waist size?</mat-label>
+        <mat-form-field>
+          <input matInput placeholder="Waist Size" type="text" formControlName="waistSize">
+          <mat-error *ngIf="form.get('waistSize').errors != null && form.get('waistSize').touched">
+            Please enter the waist size, only numeric values.
+          </mat-error>
+        </mat-form-field>
+
+        <mat-label>5. What current medications are you taking?</mat-label>
+        <mat-form-field>
+          <input matInput placeholder="Medications" type="text" formControlName="medications">
+          <mat-error *ngIf="form.get('medications').hasError('required') && form.get('medications').touched">
+            Please enter the waist size.
+          </mat-error>
+        </mat-form-field>
+
+        <mat-label>6. Do you have any allergies?</mat-label>
+        <mat-form-field>
+          <input matInput placeholder="Allergies" type="text" formControlName="allergies">
+          <mat-error *ngIf="form.get('allergies').hasError('required') && form.get('allergies').touched">
+            Please enter the allergies.
+          </mat-error>
+        </mat-form-field>
+
+      </div>
+
+      <div fxLayout="column" fxLayoutGap="30px">
+
+        <div fxLayout="column" fxLayoutGap="10px">
+          <mat-label>7. Have you seen your primary care physician within the last year?</mat-label>
+          <mat-radio-group formControlName="hasSeenPrimaryCareDr" fxLayout="row" fxLayoutGap="10px">
+            <mat-radio-button value="YES" color="primary"> Yes </mat-radio-button>
+            <mat-radio-button value="NO" color="primary"> No </mat-radio-button>
+          </mat-radio-group>
+          <mat-error
+            *ngIf="form.get('hasSeenPrimaryCareDr').hasError('required') && form.get('hasSeenPrimaryCareDr').touched">
+            Please select an answer.
+          </mat-error>
+        </div>
+
+        <div fxLayout="column" fxLayoutGap="10px">
+          <mat-label>8. Have you been prescribed any type of brace within the last 5 years?</mat-label>
+          <mat-radio-group formControlName="hasPrescBrace" fxLayout="row" fxLayoutGap="10px">
+            <mat-radio-button value="YES" color="primary"> Yes </mat-radio-button>
+            <mat-radio-button value="NO" color="primary"> No </mat-radio-button>
+          </mat-radio-group>
+          <mat-error *ngIf="form.get('hasPrescBrace').hasError('required') && form.get('hasPrescBrace').touched">
+            Please select an answer.
+          </mat-error>
+        </div>
+
+        <div fxLayout="column" fxLayoutGap="10px">
+          <mat-label>9. Are you diabetic?</mat-label>
+          <mat-radio-group formControlName="diabetic" fxLayout="row" fxLayoutGap="10px">
+            <mat-radio-button value="NO" color="primary"> No </mat-radio-button>
+            <mat-radio-button value="TYPEONE" color="primary"> Type One </mat-radio-button>
+            <mat-radio-button value="TYPETWO" color="primary"> Type Two </mat-radio-button>
+          </mat-radio-group>
+          <mat-error *ngIf="form.get('diabetic').hasError('required') && form.get('diabetic').touched">
+            Please select an answer.
+          </mat-error>
+        </div>
+
+        <div fxLayout="column" fxLayoutGap="10px">
+          <mat-label>10. Do you take insulin or oral medication for diabetes?</mat-label>
+          <mat-radio-group formControlName="insulinOrMedication" fxLayout="row" fxLayoutGap="10px">
+            <mat-radio-button value="ORAL" color="primary"> Oral </mat-radio-button>
+            <mat-radio-button value="INSULIN" color="primary"> Insulin </mat-radio-button>
+            <mat-radio-button value="BOTH" color="primary"> Both </mat-radio-button>
+            <mat-radio-button value="NOTAPPLICABLE" color="primary"> Not Applicable </mat-radio-button>
+          </mat-radio-group>
+          <mat-error
+            *ngIf="form.get('insulinOrMedication').hasError('required') && form.get('insulinOrMedication').touched">
+            Please select an answer.
+          </mat-error>
+        </div>
+
+      </div>
+
+    </div>
+
+    <button type="submit" mat-raised-button color="accent">Submit</button>
+
+  </form>
+</div>

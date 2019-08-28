@@ -1,0 +1,6 @@
+{
+    "appService.deploySubpath": "dist\\bracer",
+    "typescriptHero.imports.organizeOnSave": true,
+    "tslint.autoFixOnSave": true,
+    "appService.defaultWebAppToDeploy": ""
+}

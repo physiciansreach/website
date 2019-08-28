@@ -1,0 +1,13 @@
+@import "./../../../theme.scss";
+
+
+.intake-content{
+    margin: 0px 50px 50px 50px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+.warning{
+    background-color: #e3b3b0;
+    color: $warning-color;
+}

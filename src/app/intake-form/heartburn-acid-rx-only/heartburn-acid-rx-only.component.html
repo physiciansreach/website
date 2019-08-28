@@ -1,0 +1,32 @@
+<div class="margin-30" fxLayout="row" fxLayoutAlign="center start">
+  <form [formGroup]="form" novalidate fxLayout="column" fxLayoutGap="30px" (ngSubmit)="onSubmit()">
+
+    <div fxLayout="column" fxLayoutGap="10px">
+      <mat-label>1. How often do you experience heartburn/acid re-flux?</mat-label>
+      <mat-radio-group formControlName="q1" fxLayout="row" fxLayoutGap="10px">
+        <mat-radio-button value="never" color="primary"> Never </mat-radio-button>
+        <mat-radio-button value="oneToThree" color="primary"> 1-3 times/week </mat-radio-button>
+        <mat-radio-button value="threeToSix" color="primary"> 3-6 times/week </mat-radio-button>
+        <mat-radio-button value="daily" color="primary"> Daily </mat-radio-button>
+        <mat-radio-button value="constant" color="primary"> Constant </mat-radio-button>
+      </mat-radio-group>
+      <mat-form-field>
+        <input matInput placeholder="Other" type="text" formControlName="q1_other">
+      </mat-form-field>
+    </div>
+
+    <div fxLayout="column" fxLayoutGap="10px">
+      <label>2. What do you do for relief?</label>
+      <mat-checkbox formControlName="q2_1">Diet Changes</mat-checkbox>
+      <mat-checkbox formControlName="q2_2">OTC Meds</mat-checkbox>
+      <mat-checkbox formControlName="q2_3">Prescribed Meds</mat-checkbox>
+      <mat-checkbox formControlName="q2_4">Rest</mat-checkbox>
+      <mat-form-field>
+        <input matInput placeholder="Other" type="text" formControlName="q2_other">
+      </mat-form-field>
+    </div>
+
+    <button type="submit" mat-raised-button color="accent">Submit</button>
+    
+  </form>
+</div>

@@ -1,0 +1,13 @@
+<div fxLayout="column" fxLayoutGap="10px">
+
+  <app-intake *ngIf="!intakeApproved" [intakeForm]="intakeForm" [patient]="patient" [physician]="physician"
+    [diagnosisOptions]="diagnosisOptions" [isAdminView]="isAdminView" (formSubmitEvent)="onIntakeApproval($event)">
+  </app-intake>
+
+  <app-prescription *ngIf="intakeApproved" [intakeForm]="intakeForm" [patient]="patient" [physician]="physician"
+    [isAdminView]="isAdminView" (formSubmitEvent)="onPrescriptionApproval($event)">
+  </app-prescription>
+
+  <button *ngIf="!isAdminView" mat-raised-button color="accent" (click)="deny()">Deny</button>
+
+</div>

@@ -1,0 +1,46 @@
+<div class="margin-30" fxLayout="row" fxLayoutAlign="center start">
+  <form [formGroup]="form" novalidate fxLayout="column" fxLayoutGap="30px" (ngSubmit)="onSubmit()">
+
+    <mat-label>1. Where is your scar located?</mat-label>
+    <mat-form-field>
+      <input matInput placeholder="Location" type="text" formControlName="q1">
+      <mat-error *ngIf="form.get('q1').hasError('required') && form.get('q1').touched">Please answer the question.
+      </mat-error>
+    </mat-form-field>
+
+    <mat-label>2. How long have you had this scar?</mat-label>
+    <mat-form-field>
+      <input matInput placeholder="How Long" type="text" formControlName="q2">
+      <mat-error *ngIf="form.get('q2').hasError('required') && form.get('q2').touched">Please answer the question.
+      </mat-error>
+    </mat-form-field>
+
+    <div fxLayout="column" fxLayoutGap="10px">
+      <mat-label>3. What is the cause of your scar?</mat-label>
+      <mat-radio-group formControlName="q3" (change)="q3_change($event)" fxLayout="row" fxLayoutGap="10px">
+        <mat-radio-button value="accident_injury" color="primary"> Accident/Injury </mat-radio-button>
+        <mat-radio-button value="surgery" color="primary"> Surgery </mat-radio-button>
+        <mat-radio-button value="eczema" color="primary"> Eczema </mat-radio-button>
+        <mat-radio-button value="psoriasis" color="primary"> Psoriasis </mat-radio-button>
+        <mat-radio-button value="other" color="primary"> Other </mat-radio-button>
+      </mat-radio-group>
+      <mat-form-field *ngIf="q3DisplayOther">
+        <input matInput placeholder="Other" type="text" formControlName="q3_other">
+      </mat-form-field>
+    </div>
+
+    <div fxLayout="column" fxLayoutGap="10px">
+      <label>4. Have you treated the scar before?</label>
+      <mat-checkbox formControlName="q4_1">No</mat-checkbox>
+      <mat-checkbox formControlName="q4_2">Cream</mat-checkbox>
+      <mat-checkbox formControlName="q4_3">Plastic Surgery</mat-checkbox>
+      <mat-checkbox formControlName="q4_4">OTC Products</mat-checkbox>
+      <mat-form-field>
+        <input matInput placeholder="Other" type="text" formControlName="q4_other">
+      </mat-form-field>
+    </div>
+
+    <button type="submit" mat-raised-button color="accent">Submit</button>
+
+  </form>
+</div>

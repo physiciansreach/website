@@ -1,0 +1,261 @@
+<div style="background-color: lightgray" *ngIf="patient && intakeForm">
+
+  <div class="intake-content">
+    <form [formGroup]="form" novalidate (ngSubmit)="approve()" fxLayout="column" fxLayoutGap="20px">
+
+      <!-- DENEID -->
+      <mat-card class="warning" *ngIf="intakeForm.deniedReason">
+        <mat-card-title>DENIED!</mat-card-title>
+        <mat-card-content>
+          {{ intakeForm.deniedReason }}
+        </mat-card-content>
+      </mat-card>
+
+      <div fxLayout="row" fxLayoutGap="10px">
+
+        <div fxLayout="column" fxLayoutGap="10px" fxFlex="0 0 calc(50%)">
+
+
+          <!-- PATIENT INFORMATION-->
+          <mat-card>
+            <mat-card-title>PATIENT INFORMATION</mat-card-title>
+            <mat-card-content fxLayout="row" fxLayoutGap="10px">
+
+              <div fxLayout="column">
+                <div>Name:</div>
+                <div>Address:</div>
+                <div>Phone:</div>
+                <div>Weight:</div>
+                <div>Height:</div>
+                <div>Shoe Size:</div>
+                <div>Age:</div>
+                <div>Date of Birth:</div>
+                <div>Gender:</div>
+              </div>
+
+              <div fxLayout="column">
+                <div>{{patient.firstName}} {{patient.lastName}}</div>
+                <div>
+                  {{patient.address.addressLineOne}}
+                  {{patient.address.addressLineTwo}}
+                  {{patient.address.city}}, {{patient.address.state}} {{patient.address.zip}}
+                </div>
+                <div>{{patient.phoneNumber | phone}}</div>
+                <div>{{patient.weight}}</div>
+                <div>{{patient.height}}</div>
+                <div>{{patient.shoeSize}}</div>
+                <div>{{calcAge()}}</div>
+                <div *ngIf="patient.dateOfBirth">{{patient.dateOfBirth | date}}</div>
+                <div *ngIf="patient.sex !== undefined"> {{patient.sex | sex }}</div>
+              </div>
+
+            </mat-card-content>
+          </mat-card>
+
+          <!-- STATEMENT OF MEDICAL NECESSITY-->
+          <mat-card>
+            <mat-card-title>STATEMENT OF MEDICAL NECESSITY</mat-card-title>
+            <mat-card-content>
+              The orthotic device or devices ordered as of the result of this examination is being prescribed as
+              adjunctive therapy to assist in reducing the level of pain and symptoms associated with the patient’s
+              identiﬁed diagnosis, and for overall improvement in the patient’s quality of life.
+            </mat-card-content>
+          </mat-card>
+
+          <!-- PREVIOUSLY TRIED TREATMENTS-->
+          <mat-card>
+            <mat-card-title>PREVIOUSLY TRIED TREATMENTS</mat-card-title>
+            <mat-card-content>{{getAnswer('PainSelfTreatment')}}</mat-card-content>
+          </mat-card>
+
+          <!-- PAIN LEVEL DESCRIBED BY PATIENT-->
+          <mat-card>
+            <mat-card-title>PAIN LEVEL DESCRIBED BY PATIENT</mat-card-title>
+            <mat-card-content>{{getAnswer('PainLevel')}} on a 0-10 scale</mat-card-content>
+          </mat-card>
+
+          <!-- DIAGNOSIS-->
+          <mat-card>
+            <mat-card-title>DIAGNOSIS</mat-card-title>
+            <mat-card-content fxLayout="column">
+              <div>{{getAnswer('painArea')}} pain. </div>
+              <mat-checkbox *ngFor="let item of diagnosisOptions; let i = index" [value]="i" color="primary"
+                (change)="onDiagnosisCheck($event, i)">
+                {{item}}
+              </mat-checkbox>
+              <mat-form-field>
+                <input matInput placeholder="Other" type="text" formControlName="diagnosis_other">
+              </mat-form-field>
+              <mat-error *ngIf="this.diagnosisSelections.length === 0 && !form.get('diagnosis_other').value">
+                Please select or enter a diagnosis.
+              </mat-error>
+            </mat-card-content>
+          </mat-card>
+
+          <!-- DURATION -->
+          <mat-card>
+            <mat-card-title>DURATION</mat-card-title>
+
+            <mat-card-content fxLayout="column">
+              <div>Patient should begin using the orthosis as needed.</div>
+              <div>First date patient is authorized to begin using {{intakeForm.product}} : {{today | date}}</div>
+
+              <mat-checkbox formControlName="duration_default" color="primary"> 99 PRN </mat-checkbox>
+              <mat-form-field>
+                <input matInput placeholder="Other" type="text" formControlName="duration_other">
+              </mat-form-field>
+              <mat-error *ngIf="!form.get('duration_default').value === true && !form.get('duration_other').value">
+                Please you must either select the 99 PRN or add a custom duration.
+              </mat-error>
+
+            </mat-card-content>
+          </mat-card>
+
+          <!--ADDITIONAL DOCTOR NOTES-->
+          <mat-card>
+            <mat-card-title>ADDITIONAL DOCTOR NOTES:</mat-card-title>
+            <mat-card-content>
+              <mat-form-field>
+                <input matInput placeholder="Additional Notes" type="text" formControlName="additional_notes">
+              </mat-form-field>
+            </mat-card-content>
+          </mat-card>
+        </div>
+
+        <div fxLayout="column" fxLayoutGap="10px" fxFlex="0 0 calc(50%)">
+
+          <!-- Physician INFORMATION -->
+          <!-- DONE -->
+          <mat-card>
+            <mat-card-title>PHYSICIAN INFORMATION</mat-card-title>
+
+            <mat-card-content fxLayout="row" fxLayoutGap="10px">
+
+              <div fxLayout="column">
+                <div>Name:</div>
+                <div>NPI:</div>
+                <div>DEA:</div>
+                <div>Address:</div>
+                <div>Phone:</div>
+                <div>Fax:</div>
+                <div>Date of Service:</div>
+              </div>
+
+              <div fxLayout="column">
+                <div>{{physician?.firstName}} {{physician?.lastName}}</div>
+                <div>{{physician?.npi}}</div>
+                <div>{{physician?.dea}}</div>
+                <div> {{physician?.address.addressLineOne}}
+                  {{physician?.address.addressLineTwo}}
+                  {{physician?.address.city}}, {{physician?.address.state}} {{physician?.address.zip}}</div>
+                <div *ngIf="physician?.phoneNumber">{{physician?.phoneNumber | phone}}</div>
+                <div *ngIf="physician?.faxNumber">{{physician?.faxNumber | phone}}</div>
+                <div>{{today | date}}</div>
+              </div>
+
+            </mat-card-content>
+
+          </mat-card>
+
+          <!-- INSURANCE INFORMATION -->
+          <mat-card>
+
+            <mat-card-title>INSURANCE INFORMATION</mat-card-title>
+            <mat-card-content fxLayout="column" fxLayoutGap="10px">
+              <div>Insurance Type:
+                {{patient.insurance | insuranceType}}
+              </div>
+              <div *ngIf="patient.insurance === 1">
+                <div><strong>Medicare</strong></div>
+                <div>Member Id: {{patient.medicare.memberId}}</div>
+                <div>Patient Group: {{patient.medicare.patientGroup}}</div>
+                <div>PCN: {{patient.medicare.pcn}}</div>
+                <div>Subscriber #: {{patient.medicare.subscriberNumber}}</div>
+              </div>
+              <div *ngIf="patient.insurance === 0">
+                <div><strong>Private Insurance</strong></div>
+                <div>Insurance Id: {{patient.privateInsurance.insuranceId}}</div>
+                <div>Patient Group: {{patient.privateInsurance.group}}</div>
+                <div>PCN: {{patient.privateInsurance.pcn}}</div>
+                <div>Bin: {{patient.privateInsurance.bin}}</div>
+              </div>
+            </mat-card-content>
+          </mat-card>
+
+          <!--ORTHOSIS DEVICE(S) PRESCRIBED-->
+          <mat-card>
+            <mat-card-title>ORTHOSIS DEVICE(S) PRESCRIBED</mat-card-title>
+
+            <mat-card-content fxLayout="column">
+              <p>
+                Based on my examination of this patient, I am ordering the following orthosis for the
+                {{getAnswer('painArea')}}:
+              </p>
+
+              <p>{{intakeForm.hcpcsCode}}</p>
+
+
+            </mat-card-content>
+          </mat-card>
+
+
+          <!--Treatement Goals-->
+          <mat-card>
+            <mat-card-title>TREATMENT GOALS</mat-card-title>
+            <mat-card-content fxLayout="column">
+              <div>My treatment goal(s) for the use of the prescribed orthosis are:</div>
+              <div>• Support weak musculature </div>
+              <div>• Improvement in Patient’s function </div>
+              <div>• Decrease in Patient’s pain </div>
+              <div>• To assist the patient or improve activities of daily living </div>
+              <div>• To aid in the stabilization of the {{getAnswer('painArea')}} </div>
+              <div>• To aid in controlling unwanted movements in the area of pain </div>
+              <div>• Slow degenerative changes </div>
+              <div>• Reduce potential inﬂammation </div>
+            </mat-card-content>
+          </mat-card>
+
+
+          <!-- ORDER VERIFICATION -->
+          <mat-card>
+            <mat-card-title> ORDER VERIFICATION </mat-card-title>
+            <mat-card-content>
+              I, Dr. {{physician?.firstName}} {{physician?.lastName}}, verify and conﬁrm this order for the
+              above-named patient, and certify that I have personally performed the assessment of the patient for the
+              prescribed treatment and device and verify that it is reasonably and medically necessary, according to
+              accepted standards of medical practice within the community, for this patient’s medical condition. I
+              hereby
+              aﬃrm this documentation as part of this patient’s medical record.
+            </mat-card-content>
+          </mat-card>
+        </div>
+
+      </div>
+
+      <!-- signature -->
+      <mat-card *ngIf="!isAdminView">
+        <mat-card-title>Signature</mat-card-title>
+        <mat-card-content>
+
+          <div>
+            <button *ngIf="!signatureData" mat-raised-button color="accent" (click)="sign()">Sign</button>
+
+            <div *ngIf="signatureData">
+              <img [src]="signatureData" alt="signature" />
+              <div>Electronically Signed and Dated: {{today | date:'short'}}</div>
+              <div>{{physician?.firstName}} {{physician?.lastName}}</div>
+              <div>NPI: {{physician?.npi}}</div>
+              <div>DEA: {{physician?.dea}}</div>
+            </div>
+          </div>
+
+        </mat-card-content>
+      </mat-card>
+
+      <button *ngIf="signatureData && !isAdminView" type="submit" mat-raised-button color="accent">Approve</button>
+      <button *ngIf="isAdminView" mat-raised-button color="accent" (click)="next()">Next</button>
+
+    </form>
+  </div>
+
+</div>

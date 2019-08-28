@@ -1,0 +1,88 @@
+<div class="margin-30" fxLayout="row" fxLayoutAlign="center start">
+  <form [formGroup]="form" novalidate fxLayout="column" fxLayoutGap="30px" (ngSubmit)="onSubmit()">
+
+    <mat-card>
+      <mat-card-title> {{painArea}}</mat-card-title>
+
+      <mat-card-content fxLayout="column" fxLayoutGap="10px">
+
+        <mat-form-field>
+          <input matInput formControlName="painFeeling" placeholder="Cause of Patients Pain?">
+        </mat-form-field>
+
+        <mat-form-field>
+          <input matInput formControlName="painBegan" placeholder="Onset of pain (When did the pain begin?)">
+        </mat-form-field>
+
+        <mat-form-field>
+          <input matInput formControlName="painCause" placeholder="What Provokes Pain?">
+        </mat-form-field>
+
+        <mat-form-field>
+          <input matInput formControlName="painSelfTreatment" placeholder="What currently relieves the pain?">
+        </mat-form-field>
+
+        <mat-form-field>
+          <input matInput formControlName="painDescription"
+            placeholder="Description of Pain [Sharp/Stabbing, Weak Feeling/Unstable]">
+        </mat-form-field>
+
+        <mat-form-field>
+          <input matInput formControlName="painDuration"
+            placeholder="Duration of Pain (Constant (Daily), Intermittent (from time to time), Specifically when (activity that makes it worse))">
+        </mat-form-field>
+
+        <mat-form-field>
+          <input matInput formControlName="previousTreatment"
+            placeholder="Other or Previous Helpful Treatments(Brace, Physical Therapy, Meds)">
+        </mat-form-field>
+
+        <mat-form-field>
+          <input matInput formControlName="effectsDaily"
+            placeholder="Affects Activities of Daily Living(ADL) (If so, what?)">
+        </mat-form-field>
+
+        <mat-form-field>
+          <mat-select formControlName="hadSurgery" placeholder="Have you had surgery in this area?">
+            <mat-option value="Yes"> Yes </mat-option>
+            <mat-option value="No">No</mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <mat-form-field>
+          <input matInput formControlName="surgies" placeholder="If yes, what type of surgery?">
+        </mat-form-field>
+
+        <mat-form-field>
+          <input matInput formControlName="dateOfSurgery" placeholder="Date of Surgery"
+            [textMask]="{mask: maskService.date}">
+        </mat-form-field>
+
+        <mat-form-field>
+          <mat-select formControlName="abulatory"
+            placeholder="Are you abulatory? (can you walk on your own, or with a walker, or with a crutch)">
+            <mat-option value="Yes"> Yes </mat-option>
+            <mat-option value="No">No</mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <mat-label>Pain Rating</mat-label>
+        <mat-radio-group formControlName="painLevel" fxLayout="row" fxLayoutGap="10px">
+          <mat-radio-button value="0" color="primary"> 0 </mat-radio-button>
+          <mat-radio-button value="1" color="primary"> 1 </mat-radio-button>
+          <mat-radio-button value="2" color="primary"> 2 </mat-radio-button>
+          <mat-radio-button value="3" color="primary"> 3 </mat-radio-button>
+          <mat-radio-button value="4" color="primary"> 4 </mat-radio-button>
+          <mat-radio-button value="5" color="primary"> 5 </mat-radio-button>
+          <mat-radio-button value="6" color="primary"> 6 </mat-radio-button>
+          <mat-radio-button value="7" color="primary"> 7 </mat-radio-button>
+          <mat-radio-button value="8" color="primary"> 8 </mat-radio-button>
+          <mat-radio-button value="9" color="primary"> 9 </mat-radio-button>
+          <mat-radio-button value="10" color="primary"> 10 </mat-radio-button>
+        </mat-radio-group>
+      </mat-card-content>
+    </mat-card>
+
+    <button type="submit" mat-raised-button color="accent">Submit</button>
+  </form>
+</div>

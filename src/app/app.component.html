@@ -1,0 +1,28 @@
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+<div mat-app-background>
+
+    <div class="header" fxLayout="column" fxLayoutGap="5px">
+        <h1 class="title">Physicians Reach</h1>
+        <div fxLayout="row">
+            <h5 class="subtext">Connecting Patients with Doctors</h5>
+            <div *ngIf="loggedIn$ | async" fxLayoutAlign="end end" style="width:85%">
+                <button mat-button color="primary" class="menu-button" (click)="home()">Home</button>
+                <button mat-button color="primary" class="menu-button" (click)="billing()"
+                    *ngIf="(userAccount$ | async)?.type === 0">Billing</button>
+                <button mat-button color="primary" class="menu-button" (click)="singOutClick()">Sign Out</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="separator" fxLayout="row" fxLayoutGap="5px"> </div>
+
+    <div class="content">
+        <router-outlet></router-outlet>
+    </div>
+
+    <div class="footer">
+        Copyright Physicians Reach 2019
+    </div>
+
+</div>

@@ -1,0 +1,55 @@
+<table mat-table matSort class="mat-elevation-z8" [dataSource]="datasource">
+
+  <ng-container matColumnDef="vendorId">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header> ID </th>
+    <td mat-cell *matCellDef="let result"> {{result.vendorId}} </td>
+    <td mat-footer-cell *matFooterCellDef>-</td>
+  </ng-container>
+
+  <ng-container matColumnDef="companyName">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header>Company Name </th>
+    <td mat-cell *matCellDef="let result"> {{result.companyName}} </td>
+    <td mat-footer-cell *matFooterCellDef>-</td>
+  </ng-container>
+
+  <ng-container matColumnDef="doingBusinessAs">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header> DOB </th>
+    <td mat-cell *matCellDef="let result"> {{result.doingBusinessAs}} </td>
+    <td mat-footer-cell *matFooterCellDef>-</td>
+  </ng-container>
+
+  <ng-container matColumnDef="phoneNumber">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header> Phone Number </th>
+    <td mat-cell *matCellDef="let result"> {{result.phoneNumber | phone}} </td>
+    <td mat-footer-cell *matFooterCellDef>-</td>
+  </ng-container>
+
+  <ng-container matColumnDef="active">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header> Active </th>
+    <td mat-cell *matCellDef="let result"> {{result.active | bool}} </td>
+    <td mat-footer-cell *matFooterCellDef>-</td>
+  </ng-container>
+
+  <ng-container matColumnDef="view">
+    <th mat-header-cell *matHeaderCellDef>View</th>
+    <td mat-cell *matCellDef="let result">
+      <button mat-raised-button color="accent" (click)="view(result.vendorId)">View</button>
+    </td>
+    <td mat-footer-cell *matFooterCellDef>-</td>
+  </ng-container>
+
+  <ng-container matColumnDef="edit">
+    <th mat-header-cell *matHeaderCellDef>Edit</th>
+    <td mat-cell *matCellDef="let result">
+      <button mat-raised-button color="accent" (click)="edit(result.vendorId)">Edit</button>
+    </td>
+    <td mat-footer-cell *matFooterCellDef>
+      <button mat-raised-button color="accent" (click)="add()">Add</button>
+    </td>
+  </ng-container>
+
+
+  <tr mat-header-row *matHeaderRowDef=" columnsToDisplay "></tr>
+  <tr mat-row *matRowDef="let myRowData; columns: columnsToDisplay "></tr>
+  <tr mat-footer-row *matFooterRowDef="columnsToDisplay"></tr>
+</table>

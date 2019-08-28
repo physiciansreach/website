@@ -1,0 +1,230 @@
+<div style="background-color: lightgray" *ngIf="patient && intakeForm">
+  <div class="prescription-content" fxLayout="column" fxLayoutGap="20px">
+
+    <div fxLayout="row" fxLayoutGap="20px">
+
+      <div fxLayout="column" fxLayoutGap="10px" fxFlex="0 0 calc(50%)">
+
+        <!-- ORTHOTIC DEVICE NEED ASSESSMENT-->
+        <mat-card fxLayout="column">
+          <mat-card-title>ORTHOTIC DEVICE NEED ASSESSMENT</mat-card-title>
+          <mat-card-content>
+            EXAM DATE: {{today | date}}
+          </mat-card-content>
+        </mat-card>
+
+        <!-- ORTHOTIC DEVICE NEED ASSESSMENT-->
+        <mat-card fxLayout="column">
+          <mat-card-title>CHIEF COMPLAINT</mat-card-title>
+          <mat-card-content>
+            The patient complains of {{getAnswer('painArea')}} pain at the time of this assessment.
+          </mat-card-content>
+        </mat-card>
+
+        <!-- VITALS-->
+        <!-- DONE -->
+        <mat-card fxLayout="column">
+          <mat-card-title>VITALS</mat-card-title>
+          <mat-card-content>
+            <div>Height: {{patient.height}}</div>
+            <div>Weight: {{patient.weight}} lbs. </div>
+            <div>Shoe Size : {{patient.shoeSize}}</div>
+            <div>Waist Size: {{patient.waist}}</div>
+            <div>DOB: {{patient.dateOfBirth | date}}</div>
+          </mat-card-content>
+        </mat-card>
+
+      </div>
+
+
+      <div fxLayout="column" fxLayoutGap="10px" fxFlex="0 0 calc(50%)">
+
+        <!-- Physician INFORMATION -->
+        <mat-card>
+          <mat-card-title>PHYSICIAN INFORMATION</mat-card-title>
+          <mat-card-content>
+            <div fxLayout="row" fxLayoutGap="10px">
+              <div fxLayout="column">
+                <div>Name:</div>
+                <div>NPI:</div>
+                <div>DEA:</div>
+                <div>Address:</div>
+                <div>Phone:</div>
+                <div>Fax:</div>
+                <div>Date of Service:</div>
+              </div>
+
+              <div fxLayout="column">
+                <div>{{physician?.firstName}} {{physician?.lastName}}</div>
+                <div>{{physician?.npi}}</div>
+                <div>{{physician?.dea}}</div>
+                <div> {{physician?.address.addressLineOne}}
+                  {{physician?.address.addressLineTwo}}
+                  {{physician?.address.city}}, {{physician?.address.state}} {{physician?.address.zip}}</div>
+                <div *ngIf="physician?.phoneNumber">{{physician?.phoneNumber | phone}}</div>
+                <div *ngIf="physician?.faxNumber">{{physician?.faxNumber | phone}}</div>
+                <div>{{today | date}}</div>
+              </div>
+            </div>
+          </mat-card-content>
+        </mat-card>
+      </div>
+
+
+    </div>
+
+    <div fxLayout="column" fxLayoutGap="10px">
+
+      <mat-card>
+        <mat-card-title>SUBJECTIVE</mat-card-title>
+        <mat-card-content>
+          The patient describes their {{getAnswer('painArea')}} pain to be at a level of {{getAnswer('PainLevel')}} on
+          a
+          0 to 10 scale.
+          The patient describes
+          the
+          duration of the pain as {{getAnswer('PainDuration')}}. The etiology of the patient's
+          {{getAnswer('painArea')}}
+          pain is
+          described by patient as {{getAnswer('PainFeeling')}} .
+          Conditions
+          that cause or aggravate the {{getAnswer('painArea')}} pain include {{getAnswer('PainCause')}}. Previously,
+          the
+          patient has
+          tried
+          {{getAnswer('PainSelfTreatment')}}, with limited
+          success.
+          When
+          asked whether it eﬀects activities of daily living, the patient stated {{getAnswer('EffectsDaily')}}.
+        </mat-card-content>
+      </mat-card>
+
+      <mat-card>
+        <mat-card-title>RELATED SURGERY</mat-card-title>
+        <mat-card-content>
+          The patient states, they had {{getAnswer('Surgies')}} surgeries in the area of {{getAnswer('painArea')}}
+        </mat-card-content>
+      </mat-card>
+
+      <mat-card>
+        <mat-card-title>OBJECTIVE/ASSESSMENT</mat-card-title>
+        <mat-card-content>
+          Patient name, {{patient.firstName}} {{patient.lastName}}, a {{patient.sex | sex}}, currently {{calcAge()}}
+          years old and weighs {{patient.weight}} lbs. The patient claims their pain was initially
+          caused by {{getAnswer('PainFeeling')}} . Treatments previously tried for {{getAnswer('painArea')}} pain
+          include
+          {{getAnswer('PainSelfTreatment')}}. When asked about previous surgery, the patients
+          response was {{getAnswer('Surgies')}}. Conditions that cause or aggravate the patients
+          {{getAnswer('painArea')}} pain include {{getAnswer('PainCause')}}. The condition
+          necessitating
+          the {{intakeForm.product}} is expected to be permanent or of {{productDuration}} duration and there is a need
+          to control
+          the
+          {{getAnswer('painArea')}} pain
+          in more than one plane. Adjustments and assistance with ﬁtting and sizing will not be required for the
+          {{intakeForm.product}} . The
+          {{intakeForm.product}} is prescribed
+          for the following indication(s); the patient is ambulatory and has weakness of the {{getAnswer('painArea')}}
+          pain that requires stabilization and has the potential to beneﬁt the patient functionally.
+        </mat-card-content>
+      </mat-card>
+
+      <mat-card>
+        <mat-card-title>DIAGNOSIS</mat-card-title>
+        <mat-card-content>
+          <div>{{getAnswer('painArea')}} pain.</div>
+          <div *ngFor="let item of diagnosis;">
+            {{item}}
+          </div>
+        </mat-card-content>
+      </mat-card>
+
+      <mat-card>
+        <mat-card-title>PLAN AND TREATMENT GOALS</mat-card-title>
+        <mat-card-content>Based on my clinical impression with {{patient.firstName}} {{patient.lastName}} and
+          evaluation of their
+          condition, I am ordering the following for the
+          {{getAnswer('painArea')}}: {{intakeForm.product}} - {{intakeForm.hcpcsCode}} the patient has been advised to
+          use the device for
+          support of their
+          {{getAnswer('painArea')}} pain as needed for
+          comfort; or
+          daily
+          if necessary, to provide support to the area and aid potentially weak musculature and to improve activities of
+          daily
+          living.</mat-card-content>
+      </mat-card>
+
+      <mat-card>
+        <mat-card-title>THE INDICATIONS OF NEED</mat-card-title>
+        <mat-card-content>{{getAnswer('painArea')}}: The patient is ambulatory and has pain, discomfort and weakness in
+          the region that requires stabilization and has the potential to beneﬁt functionally, by aiding and supporting
+          the musculoskeletal unstable or weak area.
+        </mat-card-content>
+      </mat-card>
+
+      <mat-card>
+        <mat-card-title>TREATMENT GOALS</mat-card-title>
+
+        <mat-card-content>
+          <p>{{getAnswer('painArea')}} pain: Improvement in patient’s function. Improvement in patient’s pain. Increase
+            performance in
+            activities
+            of
+            daily living. Reduce medications. Slow musculoskeletal degeneration. Reduce inﬂammation.</p>
+
+          <p>Custom ﬁtting of the orthosis is not required and the patient or an assisting caregiver can apply the
+            prescribed
+            orthotic device with minimal self-adjusting</p>
+
+
+          <p>Our telephone number has been provided to {{patient.firstName}} {{patient.lastName}} in case there are
+            follow
+            up questions for his use and/or
+            adjustment
+            directions from our oﬃces. I have also recommended for the patient to speak with their primary care
+            Physician
+            in the
+            near future as part of their ongoing plan of care.</p>
+
+
+          <p>I, {{physician?.firstName}} {{physician?.lastName}}, verify and conﬁrm this order for the above-named
+            patient,
+            and certify that I have personally
+            performed
+            the
+            assessment of the patient for the prescribed treatment and device and verify that it is reasonably and
+            medically
+            necessary, according to accepted standards of medical practice within the community, for this patient’s
+            medical
+            condition.</p>
+        </mat-card-content>
+      </mat-card>
+    </div>
+
+    <!-- signature -->
+    <mat-card *ngIf="!isAdminView">
+      <mat-card-title>Signature</mat-card-title>
+      <mat-card-content>
+
+        <div>
+          <button *ngIf="!signature.content" mat-raised-button color="accent" (click)="sign()">Sign</button>
+
+          <div *ngIf="signature.content">
+            <img [src]="signature.content" alt="signature" />
+            <div>Electronically Signed and Dated: {{today | date:'short'}}</div>
+            <div>{{physician?.firstName}} {{physician?.lastName}}</div>
+            <div>NPI: {{physician?.npi}}</div>
+            <div>DEA: {{physician?.dea}}</div>
+          </div>
+        </div>
+
+      </mat-card-content>
+    </mat-card>
+
+    <button *ngIf="signature.content && !isAdminView" mat-raised-button color="accent"
+      (click)="approve()">Approve</button>
+    <button *ngIf="isAdminView" mat-raised-button color="accent" (click)="next()">Next</button>
+
+  </div>
+</div>

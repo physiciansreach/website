@@ -1,0 +1,10 @@
+<div fxLayout="row" fxLayoutAlign="center start">
+    <div fxLayout="column" fxLayoutGap="10px">
+
+        <h2>Physician</h2>
+
+        <app-physician-account-form (formSubmitEvent)="onSubmit($event)" [physician$]="physician$">
+        </app-physician-account-form>
+
+    </div>
+</div>

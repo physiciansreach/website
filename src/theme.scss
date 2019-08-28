@@ -1,0 +1,28 @@
+@import '~@angular/material/theming';
+@import './palette.scss';
+
+@include mat-core(); // Be sure that you only ever include this mixin once!
+
+
+// Define the palettes for your theme using the Material Design palettes available in palette.scss
+// (imported above). For each palette, you can optionally specify a default, lighter, and darker
+// hue. Available color palettes: https://material.io/design/color/
+$primary-soft-green-palette: mat-palette($mat-soft-green);
+$accent-sky-blue-palette: mat-palette($mat-sky-blue, 200);
+$accent-blue-palette: mat-palette($mat-blue);
+
+$primary-soft-green: mat-color($primary-soft-green-palette);
+$accent-sky-blue: mat-color($accent-sky-blue-palette);
+$accent-blue:  mat-color($accent-blue-palette);
+
+// The warn palette is optional (defaults to red).
+$warning-palette: mat-palette($mat-blood-red, 900);
+$warning-color: mat-color($warning-palette);
+
+// Create the theme object (a Sass map containing all of the palettes).
+$light-theme: mat-light-theme($primary-soft-green-palette, $accent-sky-blue-palette, $warning-palette);
+
+// Include theme styles for core and each component used in your app.
+// Alternatively, you can import and @include the theme mixins for each component
+// that you are using.
+@include angular-material-theme($light-theme);

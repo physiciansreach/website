@@ -1,0 +1,161 @@
+<div class="margin-30" fxLayout="row" fxLayoutAlign="center start">
+  <form [formGroup]="form" novalidate fxLayout="column" fxLayoutGap="30px" (ngSubmit)="onSubmit()">
+
+    <div fxLayout="row" fxLayoutGap="30px">
+
+      <div fxLayout="column">
+
+        <mat-label>1. Location(s) of pain?</mat-label>
+        <mat-form-field>
+          <input matInput placeholder="Location" type="text" formControlName="q1">
+          <mat-error *ngIf="form.get('q1').hasError('required') && form.get('q1').touched">Please answer the question.
+          </mat-error>
+        </mat-form-field>
+
+        <mat-label>2. When was the onset of pain?</mat-label>
+        <mat-form-field>
+          <input matInput placeholder="Onset" type="text" formControlName="q2">
+          <mat-error *ngIf="form.get('q2').hasError('required') && form.get('q2').touched">Please answer the question.
+          </mat-error>
+        </mat-form-field>
+
+        <mat-label>3. What was the cause of pain?</mat-label>
+        <mat-form-field>
+          <input matInput placeholder="Cause" type="text" formControlName="q3">
+          <mat-error *ngIf="form.get('q3').hasError('required') && form.get('q3').touched">Please answer the question.
+          </mat-error>
+        </mat-form-field>
+
+      </div>
+
+      <div fxLayout="column" fxLayoutGap="30px">
+
+        <div fxLayout="column" fxLayoutGap="10px">
+          <mat-label>4. What is the duration of pain?</mat-label>
+          <mat-radio-group formControlName="q4" fxLayout="row" fxLayoutGap="10px">
+            <mat-radio-button value="Daily" color="primary"> Daily </mat-radio-button>
+            <mat-radio-button value="TimeToTime" color="primary"> Time To Time </mat-radio-button>
+            <mat-radio-button value="ActivityActivated" color="primary"> Activity Activated </mat-radio-button>
+            <mat-radio-button value="Constant" color="primary"> Constant </mat-radio-button>
+          </mat-radio-group>
+          <mat-error *ngIf="form.get('q4').hasError('required') && form.get('q4').touched">Please select an
+            answer.
+          </mat-error>
+        </div>
+
+        <div fxLayout="column" fxLayoutGap="10px">
+          <label>5. Can you describe the pain?</label>
+          <mat-checkbox formControlName="q5_1" color="primary">Sharp/Stabbing</mat-checkbox>
+          <mat-checkbox formControlName="q5_2" color="primary">Dull Ache</mat-checkbox>
+          <mat-checkbox formControlName="q5_3" color="primary">Throbbing/Pulsating
+          </mat-checkbox>
+          <mat-checkbox formControlName="q5_4" color="primary">Stiffness/Tightness
+          </mat-checkbox>
+          <mat-checkbox formControlName="q5_5" color="primary">Weak feeling/Unstable
+          </mat-checkbox>
+          <mat-checkbox formControlName="q5_6" color="primary">Radiating/Traveling
+          </mat-checkbox>
+          <mat-checkbox formControlName="q5_7" color="primary">Pins & Needles</mat-checkbox>
+        </div>
+
+        <div fxLayout="column" fxLayoutGap="10px">
+          <label>6. What makes your pain feel better?</label>
+          <mat-checkbox formControlName="q6_1" color="primary">Heat</mat-checkbox>
+          <mat-checkbox formControlName="q6_2" color="primary">Ice</mat-checkbox>
+          <mat-checkbox formControlName="q6_3" color="primary">Lying Down</mat-checkbox>
+          <mat-checkbox formControlName="q6_4" color="primary">Rest</mat-checkbox>
+          <mat-checkbox formControlName="q6_5" color="primary">Hot shower</mat-checkbox>
+          <mat-checkbox formControlName="q6_6" color="primary">Medication</mat-checkbox>
+          <mat-checkbox formControlName="q6_7" color="primary">Nothing Specific</mat-checkbox>
+        </div>
+
+        <div fxLayout="column" fxLayoutGap="10px">
+          <label>7. What makes your pain feel worst?</label>
+          <mat-checkbox formControlName="q7_1" color="primary">Standing/Sitting</mat-checkbox>
+          <mat-checkbox formControlName="q7_2" color="primary">Bending/Stooping</mat-checkbox>
+          <mat-checkbox formControlName="q7_3" color="primary">Twisting</mat-checkbox>
+          <mat-checkbox formControlName="q7_4" color="primary">Walking</mat-checkbox>
+          <mat-checkbox formControlName="q7_5" color="primary">Driving</mat-checkbox>
+          <mat-checkbox formControlName="q7_6" color="primary">Lifting</mat-checkbox>
+        </div>
+
+        <div fxLayout="column" fxLayoutGap="10px">
+          <mat-label>8. Rate your pain 0 (none) - 10 (excruciating)?</mat-label>
+          <mat-radio-group formControlName="q8" fxLayout="row" fxLayoutGap="10px">
+            <mat-radio-button value="0" color="primary"> 0 </mat-radio-button>
+            <mat-radio-button value="1" color="primary"> 1 </mat-radio-button>
+            <mat-radio-button value="2" color="primary"> 2 </mat-radio-button>
+            <mat-radio-button value="3" color="primary"> 3 </mat-radio-button>
+            <mat-radio-button value="4" color="primary"> 4 </mat-radio-button>
+            <mat-radio-button value="5" color="primary"> 5 </mat-radio-button>
+            <mat-radio-button value="6" color="primary"> 6 </mat-radio-button>
+            <mat-radio-button value="7" color="primary"> 7 </mat-radio-button>
+            <mat-radio-button value="8" color="primary"> 8 </mat-radio-button>
+            <mat-radio-button value="9" color="primary"> 9 </mat-radio-button>
+            <mat-radio-button value="10" color="primary"> 10 </mat-radio-button>
+          </mat-radio-group>
+          <mat-error *ngIf="form.get('q8').hasError('required') && form.get('q8').touched">Please select an
+            answer.
+          </mat-error>
+        </div>
+
+        <div fxLayout="column" fxLayoutGap="10px">
+          <mat-label>9. Have you recently experienced pain due to muscle spasms, body tesnion or tight muscles that you
+            would like treated?
+          </mat-label>
+          <mat-radio-group formControlName="q9" fxLayout="row" fxLayoutGap="10px">
+            <mat-radio-button value="YES" color="primary"> Yes </mat-radio-button>
+            <mat-radio-button value="NO" color="primary"> No </mat-radio-button>
+          </mat-radio-group>
+          <mat-error *ngIf="form.get('q9').hasError('required') && form.get('q9').touched">Please select an
+            answer.
+          </mat-error>
+        </div>
+
+        <div fxLayout="column" fxLayoutGap="10px">
+          <mat-label>10. Have you recently experienced discomfort due to muscle pain or tightness you would like
+            treated?
+          </mat-label>
+          <mat-radio-group formControlName="q10" fxLayout="row" fxLayoutGap="10px">
+            <mat-radio-button value="YES" color="primary"> Yes </mat-radio-button>
+            <mat-radio-button value="NO" color="primary"> No </mat-radio-button>
+          </mat-radio-group>
+          <mat-error *ngIf="form.get('q10').hasError('required') && form.get('q10').touched">Please select an
+            answer.
+          </mat-error>
+        </div>
+
+        <div fxLayout="column" fxLayoutGap="10px">
+          <mat-label>11. Do you have arthritis, joint pain, or any other pain do to inflammation that you wouldl like
+            treated?
+          </mat-label>
+          <mat-radio-group formControlName="q11" fxLayout="row" fxLayoutGap="10px">
+            <mat-radio-button value="YES" color="primary"> Yes </mat-radio-button>
+            <mat-radio-button value="NO" color="primary"> No </mat-radio-button>
+          </mat-radio-group>
+          <mat-error *ngIf="form.get('q11').hasError('required') && form.get('q11').touched">Please select an
+            answer.
+          </mat-error>
+        </div>
+
+        <div fxLayout="column" fxLayoutGap="10px">
+          <mat-label>12. Have you recently experienced discomfort due to swelling or soreness that you would like
+            treated?
+          </mat-label>
+          <mat-radio-group formControlName="q12" fxLayout="row" fxLayoutGap="10px">
+            <mat-radio-button value="YES" color="primary"> Yes </mat-radio-button>
+            <mat-radio-button value="NO" color="primary"> No </mat-radio-button>
+          </mat-radio-group>
+          <mat-error *ngIf="form.get('q12').hasError('required') && form.get('q12').touched">Please select an
+            answer.
+          </mat-error>
+        </div>
+
+      </div>
+
+    </div>
+
+    <button type="submit" mat-raised-button color="accent">Submit</button>
+
+  </form>
+</div>

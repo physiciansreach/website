@@ -1,0 +1,53 @@
+<div fxLayout="column" fxLayoutGap="25px">
+  <table mat-table matSort class="mat-elevation-z8" [dataSource]="datasource">
+
+    <ng-container matColumnDef="intakeFormId">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> ID </th>
+      <td mat-cell *matCellDef="let result"> {{result.intakeFormId}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="createdOn">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Created On </th>
+      <td mat-cell *matCellDef="let result"> {{result.createdOn | date}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="status">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Status </th>
+      <td mat-cell *matCellDef="let result"> {{result.status | intakeStatus}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="physicianName">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Physician's Name </th>
+      <td mat-cell *matCellDef="let result"> {{result.physicianName}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="physicianState">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Physician's State </th>
+      <td mat-cell *matCellDef="let result"> {{result.physicianState}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="physicianPaid">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Physician Paid </th>
+      <td mat-cell *matCellDef="let result">
+        <mat-checkbox labelPosition="before" color="primary" [checked]="result.physicianPaid"
+          (change)="paid($event, result.intakeFormId)">
+        </mat-checkbox>
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="download">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Download </th>
+      <td mat-cell *matCellDef="let result">
+        <button mat-raised-button color="accent" (click)="download(result.documentId)"
+          [disabled]="result.status < IntakeStatus.Approved">Download</button>
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef=" columnsToDisplay "></tr>
+    <tr mat-row *matRowDef="let myRowData; columns: columnsToDisplay "></tr>
+  </table>
+
+  <div fxLayoutAlign="end">
+    <button type="save" mat-raised-button color="accent" (click)="save()">Save Changes</button>
+  </div>
+</div>

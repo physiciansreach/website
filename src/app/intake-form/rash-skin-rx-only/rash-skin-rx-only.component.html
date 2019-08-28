@@ -1,0 +1,36 @@
+<div class="margin-30" fxLayout="row" fxLayoutAlign="center start">
+  <form [formGroup]="form" novalidate fxLayout="column" fxLayoutGap="30px" (ngSubmit)="onSubmit()">
+
+    <mat-label>1. Where is your rash/skin irritation located?</mat-label>
+    <mat-form-field>
+      <input matInput placeholder="Location" type="text" formControlName="q1">
+      <mat-error *ngIf="form.get('q1').hasError('required') && form.get('q1').touched">Please answer the question.
+      </mat-error>
+    </mat-form-field>
+
+    <mat-label>2. How long have you had it?</mat-label>
+    <mat-form-field>
+      <input matInput placeholder="How Long" type="text" formControlName="q2">
+      <mat-error *ngIf="form.get('q2').hasError('required') && form.get('q2').touched">Please answer the question.
+      </mat-error>
+    </mat-form-field>
+
+    <mat-label>3. What is the cause of your skin irritation?</mat-label>
+    <mat-form-field>
+      <input matInput placeholder="Cause" type="text" formControlName="q3">
+      <mat-error *ngIf="form.get('q3').hasError('required') && form.get('q3').touched">Please answer the question.
+      </mat-error>
+    </mat-form-field>
+
+    <div fxLayout="column" fxLayoutGap="10px">
+      <mat-label>4. Have you treated the skin irritation before?</mat-label>
+      <mat-radio-group formControlName="q3" fxLayout="row" fxLayoutGap="10px">
+        <mat-radio-button value="yes" color="primary"> Yes </mat-radio-button>
+        <mat-radio-button value="no" color="primary"> No </mat-radio-button>
+      </mat-radio-group>
+    </div>
+
+    <button type="submit" mat-raised-button color="accent">Submit</button>
+
+  </form>
+</div>

@@ -1,0 +1,8 @@
+<div fxLayout="row" fxLayoutAlign="center start">
+  <div fxLayout="column" fxLayoutGap="10px">
+
+    <app-patient-form (formSubmitEvent)="onSubmit($event)" [patient$]="patient$" [patientId]="patientId">
+    </app-patient-form>
+
+  </div>
+</div>

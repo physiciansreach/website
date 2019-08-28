@@ -1,0 +1,168 @@
+<div class="margin-30" fxLayout="row" fxLayoutAlign="center start">
+  <form [formGroup]="form" novalidate fxLayout="column" fxLayoutGap="30px" (ngSubmit)="onSubmit()">
+
+
+    <mat-label>1. How tall are you?</mat-label>
+    <mat-form-field>
+      <select matNativeControl placeholder="Height" formControlName="q1">
+          <option *ngFor="let height of heights" [value]="height">{{height}}</option>
+      </select>
+      <mat-error *ngIf="form.get('q1').hasError('required') && form.get('q1').touched">Please enter the
+        height.
+      </mat-error>
+    </mat-form-field>
+
+    <mat-label>2. How much do you weigh?</mat-label>
+    <mat-form-field>
+      <input matInput placeholder="Weight" type="text" formControlName="q2">
+      <mat-error *ngIf="form.get('q2').errors != null && form.get('q2').touched">Please enter the weight, only numeric values.
+      </mat-error>
+    </mat-form-field>
+
+    <mat-label>3. Location of pain?</mat-label>
+    <mat-form-field>
+      <input matInput placeholder="Location" type="text" formControlName="q3">
+      <mat-error *ngIf="form.get('q3').hasError('required') && form.get('q3').touched">Please enter the location of
+        pain.</mat-error>
+    </mat-form-field>
+
+    <mat-label>4. What current medications are you taking?</mat-label>
+    <mat-form-field>
+      <input matInput placeholder="Medications" type="text" formControlName="q4">
+      <mat-error *ngIf="form.get('q4').hasError('required') && form.get('q4').touched">Please enter the medications.
+      </mat-error>
+    </mat-form-field>
+
+    <mat-label>5. Do you have any allergies?</mat-label>
+    <mat-form-field>
+      <input matInput placeholder="Allergies" type="text" formControlName="q5">
+      <mat-error *ngIf="form.get('q5').hasError('required') && form.get('q5').touched">Please enter the allergies.
+      </mat-error>
+    </mat-form-field>
+
+    <mat-label>6. Recent medical issues related to heart, liver, or kidneys?
+    </mat-label>
+    <mat-form-field>
+      <input matInput placeholder="Medical Issues" type="text" formControlName="q6">
+      <mat-error *ngIf="form.get('q6').hasError('required') && form.get('q6').touched">Please answer the question.
+      </mat-error>
+    </mat-form-field>
+
+    <div fxLayout="column" fxLayoutGap="10px">
+      <mat-label>7. Do you get migraine or sinus headaches?</mat-label>
+      <mat-radio-group formControlName="q7" fxLayout="row" fxLayoutGap="10px">
+        <mat-radio-button value="YES" color="primary"> Yes </mat-radio-button>
+        <mat-radio-button value="NO" color="primary"> No </mat-radio-button>
+      </mat-radio-group>
+      <mat-error *ngIf="form.get('q7').hasError('required') && form.get('q7').touched">Please select an answer.
+      </mat-error>
+    </div>
+
+    <div fxLayout="column" fxLayoutGap="10px">
+      <mat-label>8. Do you have any rashes or scars on your body?</mat-label>
+      <mat-radio-group formControlName="q8" fxLayout="row" fxLayoutGap="10px">
+        <mat-radio-button value="YES" color="primary"> Yes </mat-radio-button>
+        <mat-radio-button value="NO" color="primary"> No </mat-radio-button>
+      </mat-radio-group>
+      <mat-error *ngIf="form.get('q8').hasError('required') && form.get('q8').touched">Please select an answer.
+      </mat-error>
+    </div>
+
+    <div fxLayout="column" fxLayoutGap="10px">
+      <mat-label>9. Do you have chronic heartburn or acid reflux?</mat-label>
+      <mat-radio-group formControlName="q9" fxLayout="row" fxLayoutGap="10px">
+        <mat-radio-button value="YES" color="primary"> Yes </mat-radio-button>
+        <mat-radio-button value="NO" color="primary"> No </mat-radio-button>
+      </mat-radio-group>
+      <mat-error *ngIf="form.get('q9').hasError('required') && form.get('q9').touched">Please select an answer.
+      </mat-error>
+    </div>
+
+    <div fxLayout="column" fxLayoutGap="10px">
+      <mat-label>10. Do you experience dry mouth?</mat-label>
+      <mat-radio-group formControlName="q10" fxLayout="row" fxLayoutGap="10px">
+        <mat-radio-button value="YES" color="primary"> Yes </mat-radio-button>
+        <mat-radio-button value="NO" color="primary"> No </mat-radio-button>
+      </mat-radio-group>
+      <mat-error *ngIf="form.get('q10').hasError('required') && form.get('q10').touched">Please select an answer.
+      </mat-error>
+    </div>
+
+    <div fxLayout="column" fxLayoutGap="10px">
+      <mat-label>11. Are you diabetic?</mat-label>
+      <mat-radio-group formControlName="q11" fxLayout="row" fxLayoutGap="10px">
+        <mat-radio-button value="YES" color="primary"> Yes </mat-radio-button>
+        <mat-radio-button value="NO" color="primary"> No </mat-radio-button>
+        <mat-radio-button value="NOTAPPLICABLE" color="primary"> Not Applicable </mat-radio-button>
+      </mat-radio-group>
+      <mat-error *ngIf="form.get('q11').hasError('required') && form.get('q11').touched">Please select an answer.
+      </mat-error>
+    </div>
+
+    <div fxLayout="column" fxLayoutGap="10px">
+      <mat-label>12. Do you take oral or insulin to treat diabetes?</mat-label>
+      <mat-radio-group formControlName="q12" fxLayout="row" fxLayoutGap="10px">
+        <mat-radio-button value="YES" color="primary"> Oral </mat-radio-button>
+        <mat-radio-button value="NO" color="primary"> Insulin </mat-radio-button>
+        <mat-radio-button value="BOTH" color="primary"> Both </mat-radio-button>
+        <mat-radio-button value="NOTAPPLICABLE" color="primary"> Not Applicable </mat-radio-button>
+      </mat-radio-group>
+      <mat-error *ngIf="form.get('q12').hasError('required') && form.get('q12').touched">Please select an answer.
+      </mat-error>
+    </div>
+
+    <div fxLayout="column" fxLayoutGap="10px">
+      <mat-label>13. Have you seen a doctor in the last 12 months?</mat-label>
+      <mat-radio-group formControlName="q13" fxLayout="row" fxLayoutGap="10px">
+        <mat-radio-button value="YES" color="primary"> Yes </mat-radio-button>
+        <mat-radio-button value="NO" color="primary"> No </mat-radio-button>
+      </mat-radio-group>
+      <mat-error *ngIf="form.get('q13').hasError('required') && form.get('q13').touched">Please select an answer.
+      </mat-error>
+    </div>
+
+    <div fxLayout="column" fxLayoutGap="10px">
+      <mat-label>14. Have you had a liver test or liver function test?</mat-label>
+      <mat-radio-group formControlName="q14" fxLayout="row" fxLayoutGap="10px">
+        <mat-radio-button value="YES" color="primary"> Yes </mat-radio-button>
+        <mat-radio-button value="NO" color="primary"> No </mat-radio-button>
+      </mat-radio-group>
+      <mat-error *ngIf="form.get('q14').hasError('required') && form.get('q14').touched">Please select an answer.
+      </mat-error>
+    </div>
+
+    <div fxLayout="column" fxLayoutGap="10px">
+      <mat-label>15. Do you have a history of coronary heart disease?</mat-label>
+      <mat-radio-group formControlName="q15" fxLayout="row" fxLayoutGap="10px">
+        <mat-radio-button value="YES" color="primary"> Yes </mat-radio-button>
+        <mat-radio-button value="NO" color="primary"> No </mat-radio-button>
+      </mat-radio-group>
+      <mat-error *ngIf="form.get('q15').hasError('required') && form.get('q15').touched">Please select an answer.
+      </mat-error>
+    </div>
+
+    <div fxLayout="column" fxLayoutGap="10px">
+      <mat-label>16. Have you in the past or currently have a fungal infection such as athlete's foot or general
+        fungus between your toes?</mat-label>
+      <mat-radio-group formControlName="q16" fxLayout="row" fxLayoutGap="10px">
+        <mat-radio-button value="YES" color="primary"> Yes </mat-radio-button>
+        <mat-radio-button value="NO" color="primary"> No </mat-radio-button>
+      </mat-radio-group>
+      <mat-error *ngIf="form.get('q16').hasError('required') && form.get('q16').touched">Please select an answer.
+      </mat-error>
+    </div>
+
+    <div fxLayout="column" fxLayoutGap="10px">
+      <mat-label>17. Do you suffer from any of the following fungal infections of the skin?</mat-label>
+      <mat-radio-group formControlName="q17" fxLayout="row" fxLayoutGap="10px">
+        <mat-radio-button value="YES" color="primary"> Yes </mat-radio-button>
+        <mat-radio-button value="NO" color="primary"> No </mat-radio-button>
+      </mat-radio-group>
+      <mat-error *ngIf="form.get('q17').hasError('required') && form.get('q17').touched">Please select an answer.
+      </mat-error>
+    </div>
+
+    <button type="submit" mat-raised-button color="accent">Submit</button>
+
+  </form>
+</div>

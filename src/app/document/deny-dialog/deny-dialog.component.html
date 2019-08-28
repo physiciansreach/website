@@ -1,0 +1,15 @@
+<form [formGroup]="form" novalidate fxLayout="column" fxLayoutGap="20px">
+
+  <mat-form-field>
+    <input matInput placeholder="Reason*" type="text" formControlName="reason">
+    <mat-error *ngIf="form.get('reason').hasError('required')">
+      Please enter a reason for denying this request.
+    </mat-error>
+  </mat-form-field>
+
+  <div mat-dialog-actions>
+    <button mat-raised-button color="accent" (click)="ok()">Ok</button>
+    <button mat-raised-button color="accent" (click)="cancel()">Cancel</button>
+  </div>
+
+</form>

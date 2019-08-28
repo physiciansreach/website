@@ -1,0 +1,54 @@
+<div class="margin-30" fxLayout="row" fxLayoutAlign="center start">
+  <form [formGroup]="form" novalidate fxLayout="column" fxLayoutGap="30px" (ngSubmit)="onSubmit()">
+
+    <div fxLayout="column" fxLayoutGap="10px">
+      <mat-label>1. Are you experiencing itching, stinging and or burning between your toes or on the soles of your
+        feet?
+      </mat-label>
+      <mat-radio-group formControlName="q1" fxLayout="row" fxLayoutGap="10px">
+        <mat-radio-button value="YES" color="primary"> Yes </mat-radio-button>
+        <mat-radio-button value="NO" color="primary"> No </mat-radio-button>
+      </mat-radio-group>
+      <mat-error *ngIf="form.get('q1').hasError('required') && form.get('q1').touched">Please select an
+        answer.
+      </mat-error>
+    </div>
+
+    <div fxLayout="column" fxLayoutGap="10px">
+      <mat-label>2. Do you have blisters on your feet that itch?</mat-label>
+      <mat-radio-group formControlName="q2" fxLayout="row" fxLayoutGap="10px">
+        <mat-radio-button value="YES" color="primary"> Yes </mat-radio-button>
+        <mat-radio-button value="NO" color="primary"> No </mat-radio-button>
+      </mat-radio-group>
+      <mat-error *ngIf="form.get('q2').hasError('required') && form.get('q2').touched">Please select an
+        answer.
+      </mat-error>
+    </div>
+
+    <div fxLayout="column" fxLayoutGap="10px">
+      <mat-label>3. Do you have cracking and peeling skin on your feet, especially between your toes and on your soles?
+      </mat-label>
+      <mat-radio-group formControlName="q3" fxLayout="row" fxLayoutGap="10px">
+        <mat-radio-button value="YES" color="primary"> Yes </mat-radio-button>
+        <mat-radio-button value="NO" color="primary"> No </mat-radio-button>
+      </mat-radio-group>
+      <mat-error *ngIf="form.get('q3').hasError('required') && form.get('q3').touched">Please select an
+        answer.
+      </mat-error>
+    </div>
+
+    <div fxLayout="column" fxLayoutGap="12px">
+      <mat-label>4. Do you have dry skin on your soles?</mat-label>
+      <mat-radio-group formControlName="q4" fxLayout="row" fxLayoutGap="10px">
+        <mat-radio-button value="YES" color="primary"> Yes </mat-radio-button>
+        <mat-radio-button value="NO" color="primary"> No </mat-radio-button>
+      </mat-radio-group>
+      <mat-error *ngIf="form.get('q4').hasError('required') && form.get('q4').touched">Please select an
+        answer.
+      </mat-error>
+    </div>
+
+    <button type="submit" mat-raised-button color="accent">Submit</button>
+
+  </form>
+</div>

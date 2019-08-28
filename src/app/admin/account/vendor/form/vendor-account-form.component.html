@@ -1,0 +1,47 @@
+<form [formGroup]="accountForm" novalidate fxLayout="column" fxLayoutGap="20px" (ngSubmit)="onSubmit()">
+
+  <mat-form-field>
+    <input matInput placeholder="Company Name" type="text" formControlName="companyName">
+    <mat-error *ngIf="accountForm.get('companyName').hasError('required')">Please enter a value.</mat-error>
+    <mat-error *ngIf="accountForm.get('companyName').hasError('minlength')">Minimum of 2 characters.</mat-error>
+    <mat-error *ngIf="accountForm.get('companyName').hasError('maxlength')">Maximum of 100 characters.</mat-error>
+  </mat-form-field>
+
+  <mat-form-field>
+    <input matInput placeholder="Doing Business As" type="text" formControlName="doingBusinessAs">
+    <mat-error *ngIf="accountForm.get('doingBusinessAs').hasError('required')">Please enter a value.</mat-error>
+    <mat-error *ngIf="accountForm.get('doingBusinessAs').hasError('minlength')">Minimum of 2 characters.</mat-error>
+    <mat-error *ngIf="accountForm.get('doingBusinessAs').hasError('maxlength')">Maximum of 100 characters.</mat-error>
+  </mat-form-field>
+
+  <mat-form-field>
+    <input matInput placeholder="Phone Number" type="text" formControlName="phoneNumber"
+      [textMask]="{mask: maskService.phonenumber}">
+    <mat-error *ngIf="accountForm.get('phoneNumber').hasError('required')">Please enter a valid phone number.
+    </mat-error>
+    <mat-error *ngIf="accountForm.get('phoneNumber').hasError('invalidPhoneNumber')">Please enter a valid phone number.
+    </mat-error>
+  </mat-form-field>
+
+  <div fxLayout="row" fxLayoutGap="10px">
+    <mat-form-field>
+      <input matInput placeholder="Contact First Name" type="text" formControlName="contactFirstName">
+      <mat-error *ngIf="accountForm.get('contactFirstName').hasError('required')">Please enter a value.</mat-error>
+      <mat-error *ngIf="accountForm.get('contactFirstName').hasError('minlength')">Minimum of 2 characters.</mat-error>
+      <mat-error *ngIf="accountForm.get('contactFirstName').hasError('maxlength')">Maximum of 100 characters.
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field>
+      <input matInput placeholder="Contact Last Name" type="text" formControlName="contactLastName">
+      <mat-error *ngIf="accountForm.get('contactLastName').hasError('required')">Please enter a value.</mat-error>
+      <mat-error *ngIf="accountForm.get('contactLastName').hasError('minlength')">Minimum of 2 characters.</mat-error>
+      <mat-error *ngIf="accountForm.get('contactLastName').hasError('maxlength')">Maximum of 100 characters.</mat-error>
+    </mat-form-field>
+  </div>
+
+  <mat-checkbox formControlName="active" labelPosition="before" color="primary" fxFlexAlign="end">Active </mat-checkbox>
+
+  <button mat-raised-button color="accent">Submit</button>
+
+</form>

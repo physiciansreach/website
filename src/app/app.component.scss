@@ -1,0 +1,50 @@
+@import "./../theme.scss";
+
+.header {
+    margin: 0px 10px 0px 10px;
+    padding: 2px 2px 1px 30px;
+    background-color: $accent-sky-blue;   
+
+    .title{
+        margin-bottom: 3px;
+    } 
+
+    .subtext{
+        font-style: italic;
+        margin-top: 0px;
+    }
+}
+
+.separator{
+    margin: 5px 10px 0px 10px;
+    padding: 5px 0px 5px 0px;
+    border-style: solid;
+    border-color: $accent-blue;
+    border-width: 1px 0px 1px 0px;
+}
+
+.content{
+    margin: 10px;
+    min-height: 800px;
+}
+
+.mat-button.mat-primary.menu-button{
+    border-radius: 0%;
+}
+
+.mat-button.mat-primary{
+    color: $accent-blue;
+}
+
+
+.footer{
+    color: $accent-blue;
+    border-style: solid;
+    border-color: $accent-blue;
+    border-width: 1px 0px 1px 0px;
+    padding: 2px 0px 2px 0px;    
+
+    bottom:0;    
+    width: 100%;
+    margin-bottom: 3px;
+}

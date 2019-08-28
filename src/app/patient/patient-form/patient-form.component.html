@@ -1,0 +1,485 @@
+<div fxLayoutGap="20px">
+  <form [formGroup]="form" novalidate fxLayout="column" fxLayoutGap="20px" (ngSubmit)="onSubmit()">
+
+    <div fxLayout="row" fxLayoutGap="20px">
+
+      <!-- PATIENT INFORMATION -->
+      <mat-card>
+        <mat-card-title>Patient Information</mat-card-title>
+        <mat-card-content fxLayoutGap="10px">
+
+          <!-- GENDER -->
+          <div>
+            <h4>Gender:*</h4>
+            <mat-radio-group placeholder="Gender*" formControlName="sex" fxLayout="row" fxLayoutGap="20px">
+              <mat-radio-button value="Male" color="primary"> Male </mat-radio-button>
+              <mat-radio-button value="Female" color="primary"> Female </mat-radio-button>
+            </mat-radio-group>
+            <mat-error *ngIf="form.get('sex').hasError('required') && form.get('sex').touched">Please select a gender.
+            </mat-error>
+          </div>
+
+          <!-- FIRST, MIDDLE, LAST -->
+          <div fxLayout="row" fxLayoutGap="10px">
+            <mat-form-field>
+              <input matInput placeholder="First Name*" type="text" formControlName="firstName">
+              <mat-error *ngIf="form.get('firstName').hasError('required')">Please enter the first name.</mat-error>
+              <mat-error *ngIf="form.get('firstName').hasError('maxlength')"> Maximum of 100 characters. </mat-error>
+            </mat-form-field>
+
+            <mat-form-field>
+              <input matInput placeholder="Middle Name" type="text" formControlName="middleName">
+              <mat-error *ngIf="form.get('middleName').hasError('maxlength')">Maximum of 100 characters. </mat-error>
+            </mat-form-field>
+
+            <mat-form-field>
+              <input matInput placeholder="Last Name*" type="text" formControlName="lastName">
+              <mat-error *ngIf="form.get('lastName').hasError('required')">Please enter the last name.</mat-error>
+              <mat-error *ngIf="form.get('lastName').hasError('maxlength')"> Maximum of 100 characters.</mat-error>
+            </mat-form-field>
+          </div>
+
+          <!-- DOB, PHONE NUMBER -->
+          <div fxLayout="row" fxLayoutGap="10px">
+
+            <mat-form-field>
+              <input matInput [matDatepicker]="dobPicker" formControlName="dateOfBirth" placeholder="Date of Birth*">
+              <mat-datepicker #dobPicker></mat-datepicker>
+              <mat-datepicker-toggle matSuffix [for]="dobPicker"></mat-datepicker-toggle>
+              <mat-error *ngIf="form.get('dateOfBirth').hasError('required')">Please enter the birthdate.</mat-error>
+              <mat-error *ngIf="form.get('dateOfBirth').hasError('invalidDateFormat')">
+                Date must be in the format of mm/dd/yyyy.</mat-error>
+            </mat-form-field>
+
+            <mat-form-field>
+              <input matInput placeholder="Phone Number*" type="text" [textMask]="{mask: maskService.phonenumber}"
+                formControlName="phoneNumber">
+              <mat-error *ngIf="form.get('phoneNumber').hasError('required')">Please enter the phone number.</mat-error>
+              <mat-error *ngIf="form.get('phoneNumber').hasError('invalidPhoneNumber')"> Phone Number must be 9 digits.
+              </mat-error>
+            </mat-form-field>
+
+          </div>
+
+          <!-- HEIGHT, WEIGHT, WAIST SIZE-->
+          <div fxLayout="row" fxLayoutGap="10px">
+
+            <mat-form-field>
+              <mat-select placeholder="Height*" formControlName="height">
+                <mat-option *ngFor="let height of heights" [value]="height">{{height}}</mat-option>
+              </mat-select>
+
+              <mat-error *ngIf="form.get('height').hasError('required')">Please enter the
+                height.
+              </mat-error>
+            </mat-form-field>
+
+            <mat-form-field>
+              <input matInput placeholder="Weight*" type="text" formControlName="weight">
+              <mat-error *ngIf="form.get('weight').errors != null">Please enter the
+                weight, only numeric values.
+              </mat-error>
+            </mat-form-field>
+
+            <mat-form-field>
+              <input matInput placeholder="Waist Size*" type="text" formControlName="waist">
+              <mat-error *ngIf="form.get('waist').errors != null">Please enter the
+                waist
+                size, only numeric values.
+              </mat-error>
+            </mat-form-field>
+
+          </div>
+
+          <!-- SHOE SIZE, ALLERGIES -->
+          <div fxLayout="row" fxLayoutGap="10px">
+            <mat-form-field>
+              <mat-select placeholder="Shoe Size*" formControlName="shoeSize">
+                <mat-option *ngFor="let shoeSize of shoeSizes" [value]="shoeSize">{{shoeSize}}</mat-option>
+              </mat-select>
+              <mat-error *ngIf="form.get('shoeSize').hasError('required')">Please enter the
+                shoe
+                size.
+              </mat-error>
+            </mat-form-field>
+            <mat-form-field>
+              <input matInput placeholder="Allergies" type="text" formControlName="allergies">
+              <mat-error *ngIf="form.get('allergies').hasError('required')">Please enter
+                the
+                allergies.
+              </mat-error>
+            </mat-form-field>
+          </div>
+
+          <!-- ADDRESS LINE ONE, LINE TWO -->
+          <div fxLayout="row" fxLayoutGap="10px">
+            <mat-form-field>
+              <input matInput placeholder="Address Line One*" type="text" formControlName="addressLineOne">
+              <mat-error *ngIf="form.get('addressLineOne').hasError('required')">Please enter an address. </mat-error>
+              <mat-error *ngIf="form.get('addressLineOne').hasError('maxlength')"> Maximum of 100 characters.
+              </mat-error>
+            </mat-form-field>
+
+            <mat-form-field>
+              <input matInput placeholder="Address Line Two" type="text" formControlName="addressLineTwo">
+            </mat-form-field>
+            <mat-error *ngIf="form.get('addressLineTwo').hasError('maxlength')"> Maximum of 100 characters. </mat-error>
+
+          </div>
+
+          <!-- CITY, STATE, ZIP -->
+          <div fxLayout="row" fxLayoutGap="10px">
+            <mat-form-field>
+              <input matInput placeholder="City*" type="text" formControlName="city">
+              <mat-error *ngIf="form.get('city').hasError('required')">Please enter a city. </mat-error>
+              <mat-error *ngIf="form.get('city').hasError('maxlength')">Maximum of 30 characters.</mat-error>
+            </mat-form-field>
+
+            <mat-form-field>
+              <mat-select placeholder="State" formControlName="state">
+                <mat-option *ngFor="let state of states" [value]="state">
+                  {{ state }}
+                </mat-option>
+              </mat-select>
+              <mat-error *ngIf="form.get('state').hasError('required')">Please select a value.</mat-error>
+            </mat-form-field>
+
+            <mat-form-field>
+              <input matInput placeholder="Zip Code*" type="text" [textMask]="{mask: maskService.zip}"
+                formControlName="zipCode">
+              <mat-error *ngIf="form.get('zipCode').hasError('required')">Please enter a zip code.
+              </mat-error>
+              <mat-error
+                *ngIf="form.get('zipCode').hasError('required') == false && form.get('zipCode').hasError('invalidLength')">
+                Zip code must be 5 digits.</mat-error>
+
+            </mat-form-field>
+          </div>
+
+          <!-- CALL BACK TIME -->
+          <mat-form-field>
+            <mat-select placeholder="Preferred Call Back Time*" formControlName="bestTimeToCallBack">
+              <mat-option value="Morning"> Morning </mat-option>
+              <mat-option value="Afternoon"> Afternoon </mat-option>
+              <mat-option value="Evening"> Evening </mat-option>
+            </mat-select>
+            <mat-error *ngIf="form.get('bestTimeToCallBack').hasError('required')">Please select a time for the call.
+            </mat-error>
+          </mat-form-field>
+
+
+          <!-- LANGUAGE -->
+          <div>
+            <h4>Language:*</h4>
+            <mat-radio-group placeholer="Language*" formControlName="language" fxLayout="row" fxLayoutGap="20px">
+              <mat-radio-button value="English" color="primary"> English </mat-radio-button>
+              <mat-radio-button value="Spanish" color="primary"> Spanish </mat-radio-button>
+            </mat-radio-group>
+            <mat-error *ngIf="form.get('language').hasError('required') && form.get('language').touched">
+              Please select a language.
+            </mat-error>
+          </div>
+
+        </mat-card-content>
+      </mat-card>
+
+      <!--MEDICAL INFORMATION-->
+      <mat-card fxLayoutGap="10px">
+        <mat-card-title>Medical Information</mat-card-title>
+
+        <!-- DME -->
+        <div fxLayout="column" fxLayoutGap="10px">
+          <h4>DME:</h4>
+
+          <!-- MAIN PAIN AREA -->
+          <mat-form-field>
+            <mat-select placeholder="Main pain area:" formControlName="mainPainArea">
+              <mat-option *ngFor="let area of painAreas" [value]="area.value">{{area.viewValue}}</mat-option>
+            </mat-select>
+            <mat-error *ngIf="form.get('mainPainArea').hasError('required')">Please select an area of pain.
+            </mat-error>
+          </mat-form-field>
+
+          <!-- SECONDARY PAIN AREA -->
+          <mat-form-field>
+            <mat-select placeholder="Secondary pain area:" formControlName="secondPainArea">
+              <mat-option value="none">None</mat-option>
+              <mat-option *ngFor="let area of painAreas" [value]="area.value">{{area.viewValue}}</mat-option>
+            </mat-select>
+          </mat-form-field>
+
+          <!-- HAD BRACE -->
+          <div>
+            <mat-label>Have you ever had a brace for this area of pain?</mat-label>
+            <mat-radio-group formControlName="hadBraceBefore" fxLayout="row" fxLayoutGap="30px">
+              <mat-radio-button value="true" color="primary"> Yes </mat-radio-button>
+              <mat-radio-button value="false" color="primary"> No </mat-radio-button>
+            </mat-radio-group>
+            <mat-error *ngIf="form.get('hadBraceBefore').hasError('required') && form.get('hadBraceBefore').touched">
+              Please select yes or no.
+            </mat-error>
+          </div>
+
+          <!-- CREAM -->
+          <div>
+            <mat-label>
+              <div style="max-width: 400px">
+                Our doctors offer different pain relief creams to help with your pain.
+                If a doctor believes it would help your problem would you be intersted in that if your insurance covers
+                it?
+              </div>
+            </mat-label>
+            <mat-radio-group formControlName="painCream" fxLayout="row" fxLayoutGap="30px">
+              <mat-radio-button value="true" color="primary"> Yes </mat-radio-button>
+              <mat-radio-button value="false" color="primary"> No </mat-radio-button>
+            </mat-radio-group>
+            <mat-error *ngIf="form.get('painCream').hasError('required') && form.get('painCream').touched">Please select
+              yes or no.
+            </mat-error>
+          </div>
+
+
+        </div>
+
+        <br />
+
+        <!-- MEDICATIONS -->
+        <mat-form-field>
+          <input matInput placeholder="Medications" type="text" formControlName="medications">
+          <mat-error *ngIf="form.get('medications').hasError('maxlength')">Maximum of 100 characters.
+          </mat-error>
+        </mat-form-field>
+
+        <!-- NOTES -->
+        <mat-form-field>
+          <input matInput placeholder="Additional Notes" type="text" formControlName="notes">
+          <mat-error *ngIf="form.get('notes').hasError('maxlength')">Maximum of 100 characters.</mat-error>
+        </mat-form-field>
+
+
+
+        <!-- PHYSICIAN NAME -->
+        <div fxLayout="row" fxLayoutGap="10px">
+          <mat-form-field>
+            <input matInput placeholder="Primary Care Physcian Name" type="text" formControlName="physiciansName">
+            <mat-error *ngIf="form.get('physiciansName').hasError('maxlength')">Maximum of 100 characters.
+            </mat-error>
+          </mat-form-field>
+
+          <mat-form-field>
+            <input matInput placeholder="Phone Number" type="text" [textMask]="{mask: maskService.phonenumber}"
+              formControlName="physiciansPhoneNumber">
+            <mat-error *ngIf="form.get('physiciansPhoneNumber').hasError('invalidPhoneNumber')">Phone Number must be 9
+              digits.</mat-error>
+
+          </mat-form-field>
+        </div>
+
+        <!-- ADDRESS LINE ONE, LINE TWO -->
+        <div fxLayout="row" fxLayoutGap="10px">
+
+          <mat-form-field>
+            <input matInput placeholder="Address Line One" type="text" formControlName="physicianAddressLineOne">
+            <mat-error *ngIf="form.get('physicianAddressLineOne').hasError('maxlength')">Maximum of 100 characters.
+            </mat-error>
+          </mat-form-field>
+
+          <mat-form-field>
+            <input matInput placeholder="Address Line Two" type="text" formControlName="physicianAddressLineTwo">
+            <mat-error *ngIf="form.get('physicianAddressLineTwo').hasError('maxlength')">Maximum of 100 characters.
+            </mat-error>
+          </mat-form-field>
+
+        </div>
+
+        <!-- CITY, STATE, ZIP-->
+        <div fxLayout="row" fxLayoutGap="10px">
+          <mat-form-field>
+            <input matInput placeholder="City" type="text" formControlName="physicianCity">
+            <mat-error *ngIf="form.get('physicianCity').hasError('maxlength')">Maximum of 30 characters.
+            </mat-error>
+          </mat-form-field>
+
+
+          <mat-form-field>
+            <mat-select placeholder="State" formControlName="physicianState">
+              <mat-option *ngFor="let state of states" [value]="state">
+                {{ state }}
+              </mat-option>
+            </mat-select>
+            <mat-error *ngIf="form.get('physicianState').hasError('required')">Please select a value.</mat-error>
+          </mat-form-field>
+
+          <mat-form-field>
+            <input matInput placeholder="Zip Code" type="text" [textMask]="{mask: maskService.zip}"
+              formControlName="physicianZip">
+            <mat-error *ngIf="form.get('physicianZip').hasError('invalidLength')">Zip code must be 5 digits.
+            </mat-error>
+          </mat-form-field>
+        </div>
+
+
+        <!-- THERAPY TYPE -->
+        <mat-form-field>
+          <mat-select placeholder="Therapy Type*" formControlName="therapy">
+            <mat-option value="RX"> Rx </mat-option>
+            <mat-option value="DME">DME</mat-option>
+            <mat-option value="BOTH">BOTH</mat-option>
+            <mat-option value="LABS">LABS</mat-option>
+          </mat-select>
+          <mat-error *ngIf="form.get('therapy').hasError('required')">Please select a type of therapy. </mat-error>
+        </mat-form-field>
+
+        <!-- OTHER PRODUCTS -->
+        <mat-form-field>
+          <input matInput placeholder="Other Product" type="text" formControlName="otherProducts">
+          <mat-error *ngIf="form.get('otherProducts').hasError('maxlength')">Maximum of 100 characters.
+          </mat-error>
+        </mat-form-field>
+
+        <!-- INSURANCE TYPE -->
+        <div>
+          <h4>Insurance Type:*</h4>
+
+          <mat-radio-group formControlName="insuranceType" fxLayout="row" fxLayoutGap="10px">
+            <mat-radio-button value="PRIVATE" color="primary" (change)="radioChange($event)"> PRIVATE
+            </mat-radio-button>
+            <mat-radio-button value="MEDICARE" color="primary" (change)="radioChange($event)"> MEDICARE
+            </mat-radio-button>
+          </mat-radio-group>
+
+          <mat-error class="radio-button-error"
+            *ngIf="form.get('insuranceType').hasError('required') && form.get('insuranceType').touched">
+            Insurance Type Required.
+          </mat-error>
+
+        </div>
+
+        <!-- INSURANCE -->
+        <div fxLayout="row" fxLayoutGap="10px">
+
+          <div *ngIf="form.get('insuranceType').value === 'PRIVATE'" fxLayout="column" fxFlex="50">
+
+            <h4>Private Insurance</h4>
+
+            <div fxLayout="row" fxLayoutGap="10px">
+              <mat-form-field>
+                <input matInput placeholder="Insurance" type="text" formControlName="insurance">
+                <mat-error *ngIf="form.get('insurance').hasError('required')">Please enter a value </mat-error>
+              </mat-form-field>
+              <mat-form-field>
+                <input matInput placeholder="Insurance ID" type="text" formControlName="insuranceId">
+                <mat-error *ngIf="form.get('insuranceId').hasError('required')">Please enter a value </mat-error>
+              </mat-form-field>
+            </div>
+
+            <div fxLayout="row" fxLayoutGap="10px">
+              <mat-form-field>
+                <input matInput placeholder="Group" type="text" formControlName="privateGroup">
+                <mat-error *ngIf="form.get('privateGroup').hasError('required')">Please enter a value </mat-error>
+              </mat-form-field>
+              <mat-form-field>
+                <input matInput placeholder="PCN" type="text" formControlName="privatePcn">
+                <mat-error *ngIf="form.get('privatePcn').hasError('required')">Please enter a value </mat-error>
+              </mat-form-field>
+              <mat-form-field>
+                <input matInput placeholder="Bin" type="text" formControlName="bin"
+                  [textMask]="{mask: maskService.bin}">
+                <mat-error *ngIf="form.get('bin').hasError('required')">Please enter a value </mat-error>
+              </mat-form-field>
+            </div>
+
+            <mat-form-field>
+              <input matInput placeholder="Insurance Phone" [textMask]="{mask: maskService.phonenumber}" type="text"
+                formControlName="insurancePhone">
+              <mat-error *ngIf="form.get('insurancePhone').hasError('required')">Please enter a value </mat-error>
+            </mat-form-field>
+
+            <mat-form-field>
+              <input matInput placeholder="Insurance Street" type="text" formControlName="insuranceStreet">
+              <mat-error *ngIf="form.get('insuranceStreet').hasError('required')">Please enter a value </mat-error>
+            </mat-form-field>
+
+            <div fxLayout="row" fxLayoutGap="10px">
+              <mat-form-field>
+                <input matInput placeholder="Insurance City" type="text" formControlName="insuranceCity">
+                <mat-error *ngIf="form.get('insuranceCity').hasError('required')">Please enter a value </mat-error>
+              </mat-form-field>
+
+              <mat-form-field>
+                <mat-select placeholder="Insurance State" formControlName="insuranceState">
+                  <mat-option *ngFor="let state of states" [value]="state">
+                    {{ state }}
+                  </mat-option>
+                </mat-select>
+                <mat-error *ngIf="form.get('insuranceState').hasError('required')">Please select a value.
+                </mat-error>
+              </mat-form-field>
+
+              <mat-form-field>
+                <input matInput placeholder="Insurance Zip" type="text" [textMask]="{mask: maskService.zip}"
+                  formControlName="insuranceZip">
+                <mat-error *ngIf="form.get('insuranceZip').hasError('required')">Please enter a value </mat-error>
+              </mat-form-field>
+            </div>
+
+          </div>
+
+          <div *ngIf="form.get('insuranceType').value === 'MEDICARE'" fxLayout="column" fxFlex="50">
+
+            <h4>Medicare</h4>
+
+            <div fxLayout="row" fxLayoutGap="10px">
+              <mat-form-field>
+                <input matInput placeholder="Member ID" type="text" formControlName="memberId">
+                <mat-error *ngIf="form.get('memberId').hasError('required')">Please enter a value. </mat-error>
+              </mat-form-field>
+              <mat-form-field>
+                <input matInput placeholder="Patient Group" type="text" formControlName="medicareGroup">
+                <mat-error *ngIf="form.get('medicareGroup').hasError('required')">Please enter a value </mat-error>
+              </mat-form-field>
+            </div>
+
+            <div fxLayout="row" fxLayoutGap="10px">
+              <mat-form-field>
+                <input matInput placeholder="PCN" type="text" formControlName="medicarePcn">
+                <mat-error *ngIf="form.get('medicarePcn').hasError('required')">Please enter a value </mat-error>
+              </mat-form-field>
+              <mat-form-field>
+                <input matInput placeholder="Subscriber #" type="text" formControlName="subscriberNumber">
+                <mat-error *ngIf="form.get('subscriberNumber').hasError('required')">Please enter a value </mat-error>
+              </mat-form-field>
+            </div>
+
+            <div fxLayout="row" fxLayoutGap="10px">
+              <mat-form-field>
+                <input matInput placeholder="Secondary/Supplement Insurance Carrier" type="text"
+                  formControlName="secondaryInsurance">
+                <mat-error *ngIf="form.get('secondaryInsurance').hasError('required')">Please enter a value </mat-error>
+              </mat-form-field>
+              <mat-form-field>
+                <input matInput placeholder="Secondary Subscriber #" type="text"
+                  formControlName="secondarySubscriberNumber">
+                <mat-error *ngIf="form.get('secondarySubscriberNumber').hasError('required')">Please enter a value
+                </mat-error>
+              </mat-form-field>
+            </div>
+          </div>
+
+        </div>
+
+      </mat-card>
+
+    </div>
+
+    <button type="submit" mat-raised-button color="accent">Submit</button>
+
+  </form>
+
+  <mat-card *ngIf="patientId">
+    <mat-card-title>Intake Forms</mat-card-title>
+    <mat-card-content>
+      <app-intake-table [patientId]="patientId"></app-intake-table>
+    </mat-card-content>
+  </mat-card>
+</div>

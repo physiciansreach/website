@@ -1,0 +1,27 @@
+<div fxLayout="row" fxLayoutAlign="center start">
+  <div fxLayout="column" fxLayoutGap="10px">
+    <h2>Login</h2>
+
+    <form [formGroup]="loginForm" novalidate fxLayout="column" fxLayoutGap="20px" (ngSubmit)="onSubmit()"
+      style="width: 195px">
+
+      <mat-form-field>
+        <input matInput placeholder="User Name" type="text" formControlName="username">
+        <mat-error *ngIf="loginForm.get('username').hasError('required')">Please enter the user name.</mat-error>
+      </mat-form-field>
+
+      <mat-form-field>
+        <input matInput placeholder="Password" type="password" formControlName="password">
+        <mat-error *ngIf="loginForm.get('password').hasError('required')">Please enter the password.</mat-error>
+      </mat-form-field>
+
+
+      <mat-error *ngIf="loginForm.hasError('fail')">
+        Wrong username or password.
+      </mat-error>
+
+      <button mat-raised-button color="accent">Log In</button>
+
+    </form>
+  </div>
+</div>
